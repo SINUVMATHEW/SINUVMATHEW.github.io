@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crowned bird — 15-frame flight preview</title>
+  <style>
+    :root{font-family:Inter,Manrope,system-ui,sans-serif;color:#f0f4fa;background:#0b1016}
+    *{box-sizing:border-box}body{margin:0;padding:clamp(24px,5vw,64px);background:radial-gradient(circle at 70% 10%,#1b2942,#0b1016 45%);min-height:100vh}
+    main{max-width:1080px;margin:auto}header{display:flex;justify-content:space-between;gap:24px;align-items:start}
+    .eyebrow{font:600 11px/1.5 ui-monospace,monospace;letter-spacing:.14em;color:#aaa7ff;text-transform:uppercase}
+    h1{font-size:clamp(36px,6vw,68px);letter-spacing:-.075em;line-height:.96;margin:15px 0}
+    p{color:#aab7c9;line-height:1.6;max-width:630px}a{color:#d4e2ff}
+    .stage{display:grid;place-items:center;min-height:340px;margin:36px 0 24px;border:1px solid rgba(225,236,255,.17);border-radius:28px;background:radial-gradient(circle at 50% 45%,rgba(143,170,238,.18),transparent 45%),#111925;box-shadow:inset 0 1px rgba(255,255,255,.06),0 20px 80px rgba(0,0,0,.22)}
+    .sprite{width:240px;height:233px;background-image:url('/brand/bird-flight-strip.png');background-repeat:no-repeat;background-size:1500% 100%;animation:flight 1.2s steps(15,end) infinite}
+    .sprite.paused{animation-play-state:paused}@keyframes flight{to{background-position:107.142857% 0}}
+    .controls{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin:0 0 42px}
+    button{border:1px solid rgba(225,236,255,.25);border-radius:999px;padding:11px 18px;background:#dfe8f9;color:#0b1016;font:700 13px inherit;cursor:pointer}
+    label{color:#c7d2df;font-size:13px}input{accent-color:#aaa7ff;vertical-align:middle;margin-left:8px}
+    .frames{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+    figure{margin:0;padding:8px;border:1px solid rgba(225,236,255,.12);border-radius:16px;background:rgba(255,255,255,.035)}
+    figure img{display:block;width:100%;aspect-ratio:360/350;object-fit:contain}
+    figcaption{padding:5px 8px 3px;color:#aab7c9;font:600 11px ui-monospace,monospace;letter-spacing:.1em}
+    @media(max-width:700px){.frames{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.stage{min-height:280px}.sprite{width:190px;height:185px}}
+
+  </style>
+</head>
+<body>
+  <main>
+    <header><div><div class="eyebrow">Exult bird · motion study</div><h1>Fifteen frames.<br>One little flight.</h1><p>A transparent white crowned bird, extracted into numbered frames and a web-ready sprite strip. This is a preview on the portfolio’s dark palette.</p></div><a href="/">← Portfolio</a></header>
+    <div class="stage"><div class="sprite" role="img" aria-label="Looping flight animation of the crowned white bird"></div></div>
+    <div class="controls"><button type="button" id="toggle">Pause animation</button><label>Speed <input id="speed" type="range" min="0.5" max="2.5" step="0.1" value="1.2"> <output id="speed-label">1.2s</output></label></div>
+    <div class="eyebrow" style="margin-bottom:14px">Individual transparent frames · 01–15</div>
+    <div class="frames" id="frames"></div>
+  </main>
+  <script>
+    const grid=document.getElementById('frames');
+    for(let n=1;n<=15;n++){const figure=document.createElement('figure');const name=String(n).padStart(2,'0');figure.innerHTML='<img loading="lazy" alt="Flight pose '+name+'" src="/brand/bird-flight/flight-'+name+'.png"><figcaption>FRAME '+name+'</figcaption>';grid.append(figure)}
+    const sprite=document.querySelector('.sprite'),button=document.getElementById('toggle'),speed=document.getElementById('speed'),label=document.getElementById('speed-label');
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){sprite.classList.add('paused');button.textContent='Play animation'}
+    button.addEventListener('click',()=>{sprite.classList.toggle('paused');button.textContent=sprite.classList.contains('paused')?'Play animation':'Pause animation'});
+    speed.addEventListener('input',()=>{sprite.style.animationDuration=speed.value+'s';label.textContent=speed.value+'s'});
+  </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "frames": 15,
+  "width": 360,
+  "height": 350,
+  "stripWidth": 5400,
+  "stripHeight": 350,
+  "durationMs": 1200,
+  "transparent": true
+}

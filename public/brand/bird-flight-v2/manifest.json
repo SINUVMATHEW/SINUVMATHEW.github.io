@@ -1,0 +1,15 @@
+{
+  "frames": 36,
+  "width": 360,
+  "height": 350,
+  "durationMs": 1200,
+  "fps": 30,
+  "transparent": true,
+  "motion": {
+    "downstrokeFraction": 0.37,
+    "recoveryFraction": 0.63,
+    "farWingLagFraction": 0.055,
+    "headStabilization": true,
+    "tailLag": true
+  }
+}

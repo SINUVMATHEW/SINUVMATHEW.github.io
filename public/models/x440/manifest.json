@@ -1,0 +1,76 @@
+{
+  "created": "2026-11-03",
+  "units": "metres",
+  "orientation": {
+    "up": "+Y",
+    "forward": "+X"
+  },
+  "assets": [
+    {
+      "file": "x440-bike-master.glb",
+      "bytes": 9546900,
+      "triangles": 294444,
+      "primitives": 98,
+      "nodes": 134,
+      "materials": 22,
+      "textures": 3,
+      "animations": [],
+      "errors": 0,
+      "warnings": 0,
+      "extensions": [
+        "KHR_materials_emissive_strength"
+      ]
+    },
+    {
+      "file": "x440-bike-web.glb",
+      "bytes": 1009008,
+      "triangles": 131852,
+      "primitives": 98,
+      "nodes": 134,
+      "materials": 22,
+      "textures": 3,
+      "animations": [],
+      "errors": 0,
+      "warnings": 0,
+      "extensions": [
+        "KHR_materials_emissive_strength",
+        "KHR_mesh_quantization",
+        "EXT_meshopt_compression"
+      ]
+    },
+    {
+      "file": "x440-engine-master.glb",
+      "bytes": 3283312,
+      "triangles": 102818,
+      "primitives": 44,
+      "nodes": 65,
+      "materials": 10,
+      "textures": 1,
+      "animations": [
+        "Four-stroke study - 30 rpm"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "extensions": []
+    },
+    {
+      "file": "x440-engine-web.glb",
+      "bytes": 360576,
+      "triangles": 44010,
+      "primitives": 44,
+      "nodes": 65,
+      "materials": 10,
+      "textures": 1,
+      "animations": [
+        "Four-stroke study - 30 rpm"
+      ],
+      "errors": 0,
+      "warnings": 0,
+      "extensions": [
+        "KHR_mesh_quantization",
+        "EXT_meshopt_compression"
+      ]
+    }
+  ],
+  "disclosure": "Reference-informed artistic reconstruction, not manufacturer CAD. Hidden engine geometry and valve motion are illustrative. Bike master includes the exterior engine; separate engine includes internals."
+}

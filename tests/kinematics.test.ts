@@ -1,0 +1,11 @@
+import {describe,it,expect} from 'vitest';
+import {ENGINE,cycleAt,advanceAngle,rideStep} from '../src/x440/kinematics';
+import {changeMode,initialState} from '../src/x440/state';
+describe('four-stroke mechanism',()=>{
+ it('travels exactly one specified stroke between dead centres',()=>{expect(cycleAt(0).displacement).toBeCloseTo(0,8);expect(cycleAt(180).displacement).toBeCloseTo(88.4,8);expect(cycleAt(360).displacement).toBeCloseTo(0,8);expect(cycleAt(540).displacement).toBeCloseTo(88.4,8)});
+ it('preserves connecting rod length through both revolutions',()=>{for(let angle=0;angle<720;angle+=.5){const c=cycleAt(angle);expect(Math.hypot(c.pinX,c.height-c.pinY)).toBeCloseTo(ENGINE.rod,8);expect(c.displacement).toBeGreaterThanOrEqual(-1e-9);expect(c.displacement).toBeLessThanOrEqual(ENGINE.stroke+1e-9)}});
+ it('synchronizes valves with idealized stroke intervals',()=>{expect(cycleAt(90)).toMatchObject({stroke:'Intake',intake:1,exhaust:0});expect(cycleAt(270)).toMatchObject({stroke:'Compression',intake:0,exhaust:0});expect(cycleAt(450)).toMatchObject({stroke:'Power',intake:0,exhaust:0});expect(cycleAt(630)).toMatchObject({stroke:'Exhaust',intake:0,exhaust:1})});
+ it('wraps a full 720-degree cycle and handles negative scrubbing',()=>{expect(cycleAt(720)).toEqual(cycleAt(0));expect(cycleAt(-90)).toEqual(cycleAt(630))});
+ it('uses RPM in revolutions per minute and scales slow motion consistently',()=>{expect(advanceAngle(0,120,.5,false)).toBeCloseTo(360);expect(advanceAngle(0,120,.5,true)).toBeCloseTo(36);expect(advanceAngle(710,120,.1,false)).toBeCloseTo(62)});
+});
+describe('interaction recovery',()=>{it('stops the engine and clears inspection on a mode change',()=>{const s=changeMode({...initialState,mode:'engine',running:true,selected:'piston'},'ride');expect(s.running).toBe(false);expect(s.selected).toBeNull();expect(s.explosion).toBe(0)});it('starts engineering in a deterministic exploded state',()=>{expect(changeMode(initialState,'engineering')).toMatchObject({explosion:1,camera:'left',labels:true,intro:false})});it('clamps illustrative ride speed and makes braking stronger than coast',()=>{expect(rideStep(0,0,1,1)).toBe(0);expect(rideStep(109,1,0,1)).toBe(110);expect(rideStep(60,0,1,1)).toBeLessThan(rideStep(60,0,0,1))})});

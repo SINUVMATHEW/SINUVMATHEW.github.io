@@ -1,0 +1,124 @@
+.hero-visual {
+  position: relative;
+  width: min(100%, 540px);
+  aspect-ratio: 1;
+  margin-left: auto;
+  isolation: isolate;
+}
+
+.three-scene {
+  --light-x: 50%;
+  --light-y: 50%;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 42% 58% 48% 52% / 48% 42% 58% 52%;
+  border: 1px solid rgba(224, 235, 255, 0.12);
+  background:
+    radial-gradient(circle at var(--light-x) var(--light-y), rgba(210, 228, 255, 0.16), transparent 25%),
+    radial-gradient(circle at 48% 42%, rgba(94, 104, 139, 0.17), transparent 46%),
+    linear-gradient(145deg, rgba(20, 27, 38, 0.75), rgba(7, 12, 18, 0.52));
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.07),
+    inset 0 -60px 90px rgba(0, 0, 0, 0.24),
+    0 35px 90px rgba(0, 0, 0, 0.24);
+  cursor: crosshair;
+}
+
+.three-scene::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  width: 72%;
+  height: 72%;
+  left: 14%;
+  top: 13%;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 239, 255, 0.08);
+  box-shadow: 0 0 80px rgba(126, 151, 255, 0.08);
+  pointer-events: none;
+}
+
+.three-scene canvas {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.scene-glow {
+  position: absolute;
+  z-index: 3;
+  width: 170px;
+  height: 170px;
+  left: var(--light-x);
+  top: var(--light-y);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: rgba(233, 242, 255, 0.07);
+  filter: blur(34px);
+  pointer-events: none;
+  transition: left 80ms linear, top 80ms linear;
+}
+
+.hero-visual .floating {
+  z-index: 5;
+  pointer-events: none;
+}
+
+.hero-visual::after {
+  content: 'WHITE SCULPTURE · MOVE TO EXPLORE';
+  position: absolute;
+  right: 8%;
+  bottom: 4%;
+  z-index: 5;
+  color: rgba(225, 233, 244, 0.38);
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+}
+
+@media (max-width: 700px) {
+  .hero-visual {
+    width: 92%;
+    margin: 42px auto 0;
+  }
+
+  .three-scene {
+    cursor: default;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual .floating {
+    animation: none;
+  }
+
+  .scene-glow {
+    transition: none;
+  }
+}
+
+/* Interactive crowned bird */
+.three-scene--sculpture{cursor:grab;touch-action:none;background:radial-gradient(circle at var(--light-x) var(--light-y),rgba(190,215,255,.2),transparent 27%),radial-gradient(circle at 30% 28%,rgba(93,112,176,.21),transparent 48%),radial-gradient(circle at 75% 72%,rgba(169,132,216,.14),transparent 40%),linear-gradient(145deg,rgba(25,32,46,.85),rgba(8,13,22,.72))}
+.three-scene--sculpture.is-dragging{cursor:grabbing}
+.three-scene--sculpture:focus-visible{outline:2px solid #c8ddff;outline-offset:4px}
+.three-scene--sculpture .scene-glow{background:rgba(179,212,255,.11);filter:blur(42px)}
+.scene-controls{position:absolute;z-index:8;left:50%;bottom:12px;transform:translateX(-50%);display:flex;align-items:center;gap:4px;padding:5px 6px 5px 11px;border:1px solid rgba(225,235,255,.19);border-radius:999px;background:rgba(11,18,29,.73);backdrop-filter:blur(16px);box-shadow:0 8px 28px rgba(0,0,0,.28);white-space:nowrap}
+.scene-controls span{margin-right:5px;color:#d9e5f3;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.03em;text-transform:uppercase}
+.scene-controls button{display:grid;place-items:center;min-width:27px;height:27px;padding:0 6px;border:1px solid rgba(225,235,255,.13);border-radius:50px;background:rgba(255,255,255,.08);color:#f3f7fc;font-size:15px;line-height:1;cursor:pointer}
+.scene-controls button:last-child{padding:0 9px;font-family:'DM Mono',monospace;font-size:9px}
+.scene-controls button:hover,.scene-controls button:focus-visible{background:rgba(174,198,255,.29);border-color:rgba(225,235,255,.48)}
+.hero-visual::after{content:'CROWNED BIRD · INTERACTIVE 3D';top:4%;bottom:auto;right:8%;font-size:8px;color:rgba(225,233,244,.38)}
+@media(max-width:700px){.scene-controls{bottom:10px}.scene-controls span{font-size:8px}.scene-controls button{min-width:25px;height:25px}}
+
+/* The large crowned-bird sculpture is intentionally hidden from the landing page for now. */
+.hero-visual--quiet{display:grid;place-items:center;cursor:default;background:radial-gradient(circle at 52% 44%,rgba(209,220,255,.11),transparent 28%),radial-gradient(circle at 70% 72%,rgba(178,141,222,.1),transparent 42%),linear-gradient(145deg,rgba(20,27,38,.72),rgba(7,12,18,.5))}
+.hero-visual--quiet::before{content:'';position:absolute;width:68%;height:68%;border:1px solid rgba(232,239,255,.1);border-radius:50%;box-shadow:0 0 100px rgba(126,151,255,.1),inset 0 0 50px rgba(255,255,255,.025)}
+.hero-visual--quiet::after{content:'A QUIET PLACE FOR THE NEXT STUDY';top:auto;right:10%;bottom:8%;font-size:8px;color:rgba(225,233,244,.35)}
+.hero-visual-orbit{position:relative;width:39%;aspect-ratio:1;border:1px solid rgba(219,229,255,.22);border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 70px rgba(161,184,255,.12)}
+.hero-visual-orbit::before,.hero-visual-orbit::after{content:'';position:absolute;inset:14%;border:1px solid rgba(219,229,255,.1);border-radius:50%;transform:rotate(58deg) scaleX(.72)}
+.hero-visual-orbit::after{inset:28%;border-color:rgba(228,175,130,.24);transform:rotate(-32deg) scaleX(.64)}
+.hero-visual-stamp{position:absolute;left:10%;top:8%;font-size:8px;letter-spacing:.16em;color:rgba(225,233,244,.38)}

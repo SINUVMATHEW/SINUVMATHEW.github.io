@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.pnpm-store/
+.node_modules-partial/
+*.log
+
+.node_modules-before-x440/
+.cache/
